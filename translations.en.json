@@ -1,0 +1,170 @@
+{
+  "adderboard": {
+    "short": "AdderBoard",
+    "venue": "February 2026 · Community challenge and leaderboard",
+    "method": "Seeks the smallest autoregressive Transformer for ten-digit addition, with separate trained and analytically specified weight tracks. Coding agents contributed to some analytic constructions.",
+    "relation": "An example of tiny-network construction explicitly mentioned in the WSP report. The analytic track is the closest comparison; the whole single-task leaderboard should not be treated as a gradient-free method or general weight programming."
+  },
+  "fast": {
+    "short": "Fast weights",
+    "venue": "1992 · Neural Computation",
+    "method": "One network produces context-dependent weight updates that control another network's fast memory. The system is trained using gradients.",
+    "relation": "Historical background: one network programming another predates WSP. This differs from a general-purpose LLM editing weights to meet a natural-language goal."
+  },
+  "es": {
+    "short": "ES",
+    "venue": "March 2017 · Preprint",
+    "method": "Uses parameter perturbations and rewards to estimate update directions and train policies through black-box optimization, without backpropagating through the target network.",
+    "relation": "Optimization background: avoiding target-network backpropagation is not new. ES relies on randomized search and feedback rather than an LLM's mechanistic reasoning to choose edits."
+  },
+  "rewrite": {
+    "short": "Rewriting",
+    "venue": "First public July 2020 · ECCV 2020",
+    "method": "Treats a layer of a generative model as a linear associative memory and locally rewrites the generative rules encoded in it.",
+    "relation": "Editing background: changes rules inside a model rather than just its outputs. Researchers design the editing algorithm instead of a general-purpose LLM devising it autonomously."
+  },
+  "rasp": {
+    "short": "RASP",
+    "venue": "First public June 2021 · ICML 2021",
+    "method": "Introduces RASP, expressing programs such as counting and sorting through abstractions of attention and feedforward computation.",
+    "relation": "Construction background: expresses algorithms as computations a Transformer can implement. RASP itself is not a compiler that directly outputs weights."
+  },
+  "soups": {
+    "short": "Model Soups",
+    "venue": "First public March 2022 · ICML 2022",
+    "method": "Averages the weights of multiple models fine-tuned from the same pretrained model, combining them into one model.",
+    "relation": "Weight-arithmetic background: combines already trained weights. The capabilities come from fine-tuning results, rather than modifications constructed through LLM reasoning."
+  },
+  "actadd": {
+    "short": "ActAdd",
+    "venue": "First public August 2023 · Preprint",
+    "method": "Constructs a behavioral direction from differences in intermediate activations on contrasting prompts, then adds it during forward passes.",
+    "relation": "A nearby directional intervention: controls runtime activations without permanently writing the intervention into weights. This should be distinguished from weight orthogonalization."
+  },
+  "repe": {
+    "short": "RepE",
+    "venue": "First public October 2023 · Preprint",
+    "method": "Reads and intervenes on internal representations of high-level behavior, analyzing population-level representations rather than individual neurons.",
+    "relation": "Related representation analysis and control: helps explain where behavioral directions come from, but is not the same as a general-purpose LLM autonomously reading and writing weights."
+  },
+  "thinkedit": {
+    "short": "ThinkEdit",
+    "venue": "First public March 2025 · EMNLP 2025",
+    "method": "Extracts a direction from long and short reasoning activations, locates short-reasoning attention heads, and orthogonalizes their output weights without a gradient optimizer for the edit.",
+    "relation": "A close methodological comparison for WSP's Qwen experiment: both repair reasoning through local weight interventions. ThinkEdit addresses overly short reasoning; WSP addresses repetitive loops, with an LLM organizing diagnosis and editing."
+  },
+  "weightsteer": {
+    "short": "Weight steer",
+    "venue": "First public November 2025 · ICLR 2026",
+    "method": "Fine-tunes opposite behaviors separately, subtracts the two weight updates to obtain a direction, and adds or removes it to steer behavior.",
+    "relation": "Related weight-direction editing: connects task vectors with behavioral steering. Its direction comes from two fine-tunes, so the full procedure is not training-free."
+  },
+  "d2l": {
+    "short": "Doc-to-LoRA",
+    "venue": "February 2026 · Preprint",
+    "method": "A specially trained hypernetwork converts document context into a LoRA adapter in one forward pass, enabling subsequent questions without rereading the original context.",
+    "relation": "Related weight generation: external information enters parameters directly. It relies on a trained amortized generator rather than a general-purpose LLM autonomously analyzing weights."
+  },
+  "l2w": {
+    "short": "L2W",
+    "venue": "September 2026 · Preprint",
+    "method": "Uses Jacobian lens to locate components associated with a semantic target, then performs local post-editing through counterexample-guided closing and reopening of components.",
+    "relation": "A related goal-driven editing workflow: localization, intervention, and validation form a loop. Localization uses Jacobians, so the entire pipeline should not be labeled gradient-free."
+  },
+  "learnopt": {
+    "short": "Learned opt.",
+    "venue": "First public 2016",
+    "method": "Trains an LSTM to learn parameter-update rules, making the optimizer itself learnable.",
+    "relation": "A network deciding how another network updates already has precedents. Specialized training and gradients distinguish it from reasoning-driven editing by a general-purpose LLM."
+  },
+  "hyper": {
+    "short": "Hypernets",
+    "venue": "First public 2016",
+    "method": "Trains one network to generate another network's weights.",
+    "relation": "Network-generated weights predate WSP. WSP investigates the weight-reading and writing capabilities already available in a general-purpose LLM."
+  },
+  "mend": {
+    "short": "MEND",
+    "venue": "2021 preprint · ICLR 2022",
+    "method": "Trains an auxiliary editing network to transform the target model's gradients into fast local updates.",
+    "relation": "A model editing another model is not new. MEND uses a specially trained editor and target-model gradients during editing."
+  },
+  "circuits": {
+    "short": "Circuits",
+    "venue": "2021 · Research article",
+    "method": "Explains computational circuits in small Transformers using the residual stream and compositions of QK and OV matrices.",
+    "relation": "Provides a framework for inferring computation from weights. WSP explores whether an LLM can perform related analyses autonomously."
+  },
+  "rome": {
+    "short": "ROME",
+    "venue": "First public 2022 · NeurIPS 2022",
+    "method": "Locates factual recall through causal interventions, then applies a rank-one edit to MLP weights.",
+    "relation": "Mechanism localization followed by local weight editing has precedents. ROME uses a dedicated algorithm, while WSP puts an LLM in charge of designing the approach."
+  },
+  "task": {
+    "short": "Task arith.",
+    "venue": "2022 preprint · ICLR 2023",
+    "method": "Subtracts original weights from fine-tuned weights to obtain task vectors, then adds, subtracts, scales, or combines them.",
+    "relation": "Weight-direction editing predates WSP. Task vectors come from fine-tuning; WSP's modifications come from operations designed by the LLM."
+  },
+  "tracr": {
+    "short": "Tracr",
+    "venue": "First public 2023 · NeurIPS 2023",
+    "method": "Compiles formal RASP programs into Transformer weights that implement computations such as counting and sorting.",
+    "relation": "Constructing weights without training the target network has precedents. WSP explores whether an LLM can design computations from task descriptions and write them into weights."
+  },
+  "nfn": {
+    "short": "NFN",
+    "venue": "First public 2023 · NeurIPS 2023",
+    "method": "Designs networks that respect neuron-permutation symmetries to process other networks' weights or gradients.",
+    "relation": "Models that analyze or transform weights as data already exist. These use specialized architectures and training."
+  },
+  "openai": {
+    "short": "Neuron expl.",
+    "venue": "May 2023 · OpenAI research article",
+    "method": "GPT-4 proposes neuron explanations from text and activation samples, then tests them through activation prediction.",
+    "relation": "General-purpose LLMs explaining models predate WSP. The core evidence is activation samples and the main output is an explanation, rather than a weight edit."
+  },
+  "opro": {
+    "short": "OPRO",
+    "venue": "2023 preprint · ICLR 2024",
+    "method": "An LLM proposes new candidates using an objective, previous candidates, and scores, iteratively optimizing mainly prompts.",
+    "relation": "The propose–evaluate–revise outer loop has precedents. WSP extends the objects being manipulated to weights and weight-editing programs."
+  },
+  "caa": {
+    "short": "CAA",
+    "venue": "2023 preprint · ACL 2024",
+    "method": "Extracts a direction from activation differences between positive and negative behavioral examples, adding or subtracting it during inference to adjust behavior.",
+    "relation": "Behavioral direction control has precedents. CAA changes runtime activations; WSP's writing experiments modify stored weights."
+  },
+  "patch": {
+    "short": "Patchscopes",
+    "venue": "First public 2024",
+    "method": "Patches hidden representations into another model computation and uses the generated language to explain them.",
+    "relation": "Model-assisted interpretation of internal information has precedents. The main objects are hidden representations, rather than weights themselves."
+  },
+  "maia": {
+    "short": "MAIA",
+    "venue": "First public 2024 · ICML 2024",
+    "method": "A vision-language model calls tools, proposes hypotheses, and iterates on experiments to explain features and discover failure modes.",
+    "relation": "Autonomous agents analyzing models predate WSP. The analysis workflow is related, but programming target weights is not the core objective."
+  },
+  "direction": {
+    "short": "Ablation",
+    "venue": "First public 2024 · NeurIPS 2024",
+    "method": "Extracts a behavioral direction, applies directional ablation, and makes the intervention persistent through weight orthogonalization.",
+    "relation": "A close operational comparison for WSP's Qwen direction edit. WSP puts the LLM in charge of diagnosis, localization, and intervention selection."
+  },
+  "t2l": {
+    "short": "Text-to-LoRA",
+    "venue": "First public 2025 · ICML 2025",
+    "method": "A specially trained hypernetwork generates a LoRA adapter in one forward pass from a natural-language task description.",
+    "relation": "Natural language to weight updates has precedents. It relies on a specially trained generator, unlike a general-purpose LLM autonomously analyzing and designing edits."
+  },
+  "wsp": {
+    "short": "WSP",
+    "venue": "November 2, 2026 · Research blog",
+    "method": "A general-purpose LLM reads, repairs, or constructs network weights around natural-language goals. Some experiments use forward-pass feedback.",
+    "relation": "Assigns analysis, editing, and construction to a general-purpose LLM. Target-weight edits do not use a gradient optimizer; this does not imply no examples, feedback, or experimental selection."
+  }
+}

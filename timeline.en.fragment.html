@@ -1,0 +1,115 @@
+<div id="wsp-history">
+  <h2>Research leading to WSP</h2>
+  <div class="text-small text-muted wh-caption">1992–2026 · 28 representative works · 5 research routes</div>
+  <div class="card wh-detail" aria-live="polite">
+    <div class="text-small" id="wh-meta"></div>
+    <a id="wh-title" target="_blank" rel="noopener noreferrer"></a>
+    <div id="wh-method"></div>
+    <div id="wh-relation"></div>
+  </div>
+  <div class="wh-head" aria-hidden="true"><span>Year</span><span>Mechanisms</span><span>Behavior editing</span><span>Weight generation</span><span>Network construction</span><span>Research & optimization</span></div>
+  <div id="wh-years" aria-label="Works arranged by year and research route"></div>
+  <div class="text-small text-muted wh-caption">◆ 12 later additions · ● 16 initial entries · Select a work for details and its source</div>
+  <div class="text-small text-muted wh-caption">Grouped by first public year; spacing is not proportional to elapsed time. Routes indicate conceptual relationships, not direct influence or priority claims.</div>
+</div>
+<style>
+#wsp-history { color:var(--foreground); }
+#wsp-history .wh-caption { margin-top:calc(var(--font-size-base)*.5); }
+#wsp-history .wh-detail { margin-top:var(--font-size-base); margin-bottom:var(--font-size-base); display:grid; gap:calc(var(--font-size-base)*.5); overflow-wrap:anywhere; }
+#wsp-history .wh-head, #wsp-history .wh-year { display:grid; grid-template-columns:48px repeat(5,minmax(0,1fr)); column-gap:calc(var(--font-size-base)*.5); }
+#wsp-history .wh-head { padding-bottom:calc(var(--font-size-base)*.7); border-bottom:1px solid var(--border); }
+#wsp-history .wh-year { padding-top:var(--font-size-base); padding-bottom:var(--font-size-base); border-bottom:1px solid var(--border); }
+#wsp-history .wh-year-label { font-weight:500; }
+#wsp-history .wh-lane { min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:calc(var(--font-size-base)*.65); }
+#wsp-history .wh-entry { display:flex; align-items:center; gap:calc(var(--font-size-base)*.35); max-width:100%; }
+#wsp-history .wh-dot { width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:var(--route-color); }
+#wsp-history .wh-new { border-radius:0; transform:rotate(45deg); }
+#wsp-history .wh-mobile-label { display:none; }
+#wsp-history .wh-merge { grid-column:2/7; display:flex; flex-wrap:wrap; gap:calc(var(--font-size-base)*.5); align-items:center; margin-top:var(--font-size-base); }
+#wsp-history .wh-merge-marks { display:flex; gap:6px; }
+@media(max-width:680px) {
+ #wsp-history .wh-head { display:none; }
+ #wsp-history .wh-year { grid-template-columns:48px minmax(0,1fr); row-gap:var(--font-size-base); }
+ #wsp-history .wh-lane { grid-column:2; }
+ #wsp-history .wh-lane:empty { display:none; }
+ #wsp-history .wh-year-label { grid-column:1; grid-row:1; }
+ #wsp-history .wh-mobile-label { display:block; }
+ #wsp-history .wh-merge { grid-column:2; }
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script>
+(() => {
+const root = document.getElementById('wsp-history');
+const papers = [
+ {id:'adderboard',year:2026,lane:3,short:"AdderBoard",added:true,title:'AdderBoard: A Community Challenge for Tiny Arithmetic Transformers',venue:"February 2026 · Community challenge and leaderboard",url:'https://github.com/anadim/AdderBoard',method:"Seeks the smallest autoregressive Transformer for ten-digit addition, with separate trained and analytically specified weight tracks. Coding agents contributed to some analytic constructions.",relation:"An example of tiny-network construction explicitly mentioned in the WSP report. The analytic track is the closest comparison; the whole single-task leaderboard should not be treated as a gradient-free method or general weight programming."},
+ {id:'fast',year:1992,lane:2,short:"Fast weights",added:true,title:'Learning to Control Fast-Weight Memories: An Alternative to Dynamic Recurrent Networks',venue:"1992 · Neural Computation",url:'https://people.idsia.ch/~juergen/fastweights/',method:"One network produces context-dependent weight updates that control another network's fast memory. The system is trained using gradients.",relation:"Historical background: one network programming another predates WSP. This differs from a general-purpose LLM editing weights to meet a natural-language goal."},
+ {id:'es',year:2017,lane:4,short:"ES",added:true,title:'Evolution Strategies as a Scalable Alternative to Reinforcement Learning',venue:"March 2017 · Preprint",url:'https://arxiv.org/abs/1703.03864',method:"Uses parameter perturbations and rewards to estimate update directions and train policies through black-box optimization, without backpropagating through the target network.",relation:"Optimization background: avoiding target-network backpropagation is not new. ES relies on randomized search and feedback rather than an LLM's mechanistic reasoning to choose edits."},
+ {id:'rewrite',year:2020,lane:1,short:"Rewriting",added:true,title:'Rewriting a Deep Generative Model',venue:"First public July 2020 · ECCV 2020",url:'https://arxiv.org/abs/2007.15646',method:"Treats a layer of a generative model as a linear associative memory and locally rewrites the generative rules encoded in it.",relation:"Editing background: changes rules inside a model rather than just its outputs. Researchers design the editing algorithm instead of a general-purpose LLM devising it autonomously."},
+ {id:'rasp',year:2021,lane:3,short:"RASP",added:true,title:'Thinking Like Transformers',venue:"First public June 2021 · ICML 2021",url:'https://arxiv.org/abs/2106.06981',method:"Introduces RASP, expressing programs such as counting and sorting through abstractions of attention and feedforward computation.",relation:"Construction background: expresses algorithms as computations a Transformer can implement. RASP itself is not a compiler that directly outputs weights."},
+ {id:'soups',year:2022,lane:1,short:"Model Soups",added:true,title:'Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time',venue:"First public March 2022 · ICML 2022",url:'https://arxiv.org/abs/2203.05482',method:"Averages the weights of multiple models fine-tuned from the same pretrained model, combining them into one model.",relation:"Weight-arithmetic background: combines already trained weights. The capabilities come from fine-tuning results, rather than modifications constructed through LLM reasoning."},
+ {id:'actadd',year:2023,lane:1,short:"ActAdd",added:true,title:'Steering Language Models With Activation Engineering',venue:"First public August 2023 · Preprint",url:'https://arxiv.org/abs/2308.10248',method:"Constructs a behavioral direction from differences in intermediate activations on contrasting prompts, then adds it during forward passes.",relation:"A nearby directional intervention: controls runtime activations without permanently writing the intervention into weights. This should be distinguished from weight orthogonalization."},
+ {id:'repe',year:2023,lane:0,short:"RepE",added:true,title:'Representation Engineering: A Top-Down Approach to AI Transparency',venue:"First public October 2023 · Preprint",url:'https://arxiv.org/abs/2310.01405',method:"Reads and intervenes on internal representations of high-level behavior, analyzing population-level representations rather than individual neurons.",relation:"Related representation analysis and control: helps explain where behavioral directions come from, but is not the same as a general-purpose LLM autonomously reading and writing weights."},
+ {id:'thinkedit',year:2025,lane:1,short:"ThinkEdit",added:true,title:'ThinkEdit: Interpretable Weight Editing to Mitigate Overly Short Thinking in Reasoning Models',venue:"First public March 2025 · EMNLP 2025",url:'https://aclanthology.org/2025.emnlp-main.861/',method:"Extracts a direction from long and short reasoning activations, locates short-reasoning attention heads, and orthogonalizes their output weights without a gradient optimizer for the edit.",relation:"A close methodological comparison for WSP's Qwen experiment: both repair reasoning through local weight interventions. ThinkEdit addresses overly short reasoning; WSP addresses repetitive loops, with an LLM organizing diagnosis and editing."},
+ {id:'weightsteer',year:2025,lane:1,short:"Weight steer",added:true,title:'Steering Language Models with Weight Arithmetic',venue:"First public November 2025 · ICLR 2026",url:'https://arxiv.org/abs/2511.05408',method:"Fine-tunes opposite behaviors separately, subtracts the two weight updates to obtain a direction, and adds or removes it to steer behavior.",relation:"Related weight-direction editing: connects task vectors with behavioral steering. Its direction comes from two fine-tunes, so the full procedure is not training-free."},
+ {id:'d2l',year:2026,lane:2,short:"Doc-to-LoRA",added:true,title:'Doc-to-LoRA: Learning to Instantly Internalize Contexts',venue:"February 2026 · Preprint",url:'https://arxiv.org/abs/2602.15902',method:"A specially trained hypernetwork converts document context into a LoRA adapter in one forward pass, enabling subsequent questions without rereading the original context.",relation:"Related weight generation: external information enters parameters directly. It relies on a trained amortized generator rather than a general-purpose LLM autonomously analyzing weights."},
+ {id:'l2w',year:2026,lane:1,short:"L2W",added:true,title:'From Latents to Wires: Surgical Post-Editing on Large Language Models',venue:"September 2026 · Preprint",url:'https://arxiv.org/abs/2609.32434',method:"Uses Jacobian lens to locate components associated with a semantic target, then performs local post-editing through counterexample-guided closing and reopening of components.",relation:"A related goal-driven editing workflow: localization, intervention, and validation form a loop. Localization uses Jacobians, so the entire pipeline should not be labeled gradient-free."},
+ {id:'learnopt',year:2016,lane:1,short:"Learned opt.",title:'Learning to learn by gradient descent by gradient descent',venue:"First public 2016",url:'https://arxiv.org/abs/1606.04474',method:"Trains an LSTM to learn parameter-update rules, making the optimizer itself learnable.",relation:"A network deciding how another network updates already has precedents. Specialized training and gradients distinguish it from reasoning-driven editing by a general-purpose LLM."},
+ {id:'hyper',year:2016,lane:2,short:"Hypernets",title:'HyperNetworks',venue:"First public 2016",url:'https://arxiv.org/abs/1609.09106',method:"Trains one network to generate another network's weights.",relation:"Network-generated weights predate WSP. WSP investigates the weight-reading and writing capabilities already available in a general-purpose LLM."},
+ {id:'mend',year:2021,lane:1,short:"MEND",title:'Fast Model Editing at Scale',venue:"2021 preprint · ICLR 2022",url:'https://arxiv.org/abs/2110.11309',method:"Trains an auxiliary editing network to transform the target model's gradients into fast local updates.",relation:"A model editing another model is not new. MEND uses a specially trained editor and target-model gradients during editing."},
+ {id:'circuits',year:2021,lane:0,short:"Circuits",title:'A Mathematical Framework for Transformer Circuits',venue:"2021 · Research article",url:'https://transformer-circuits.pub/2021/framework/index.html',method:"Explains computational circuits in small Transformers using the residual stream and compositions of QK and OV matrices.",relation:"Provides a framework for inferring computation from weights. WSP explores whether an LLM can perform related analyses autonomously."},
+ {id:'rome',year:2022,lane:1,short:"ROME",title:'Locating and Editing Factual Associations in GPT',venue:"First public 2022 · NeurIPS 2022",url:'https://arxiv.org/abs/2202.05262',method:"Locates factual recall through causal interventions, then applies a rank-one edit to MLP weights.",relation:"Mechanism localization followed by local weight editing has precedents. ROME uses a dedicated algorithm, while WSP puts an LLM in charge of designing the approach."},
+ {id:'task',year:2022,lane:1,short:"Task arith.",title:'Editing Models with Task Arithmetic',venue:"2022 preprint · ICLR 2023",url:'https://arxiv.org/abs/2212.04089',method:"Subtracts original weights from fine-tuned weights to obtain task vectors, then adds, subtracts, scales, or combines them.",relation:"Weight-direction editing predates WSP. Task vectors come from fine-tuning; WSP's modifications come from operations designed by the LLM."},
+ {id:'tracr',year:2023,lane:2,short:"Tracr",title:'Tracr: Compiled Transformers as a Laboratory for Interpretability',venue:"First public 2023 · NeurIPS 2023",url:'https://arxiv.org/abs/2301.05062',method:"Compiles formal RASP programs into Transformer weights that implement computations such as counting and sorting.",relation:"Constructing weights without training the target network has precedents. WSP explores whether an LLM can design computations from task descriptions and write them into weights."},
+ {id:'nfn',year:2023,lane:0,short:"NFN",title:'Permutation Equivariant Neural Functionals',venue:"First public 2023 · NeurIPS 2023",url:'https://arxiv.org/abs/2302.14040',method:"Designs networks that respect neuron-permutation symmetries to process other networks' weights or gradients.",relation:"Models that analyze or transform weights as data already exist. These use specialized architectures and training."},
+ {id:'openai',year:2023,lane:0,short:"Neuron expl.",title:'Language models can explain neurons in language models',venue:"May 2023 · OpenAI research article",url:'https://openai.com/index/language-models-can-explain-neurons-in-language-models/',method:"GPT-4 proposes neuron explanations from text and activation samples, then tests them through activation prediction.",relation:"General-purpose LLMs explaining models predate WSP. The core evidence is activation samples and the main output is an explanation, rather than a weight edit."},
+ {id:'opro',year:2023,lane:1,short:"OPRO",title:'Large Language Models as Optimizers',venue:"2023 preprint · ICLR 2024",url:'https://arxiv.org/abs/2309.03409',method:"An LLM proposes new candidates using an objective, previous candidates, and scores, iteratively optimizing mainly prompts.",relation:"The propose–evaluate–revise outer loop has precedents. WSP extends the objects being manipulated to weights and weight-editing programs."},
+ {id:'caa',year:2023,lane:1,short:"CAA",title:'Steering Llama 2 via Contrastive Activation Addition',venue:"2023 preprint · ACL 2024",url:'https://arxiv.org/abs/2312.06681',method:"Extracts a direction from activation differences between positive and negative behavioral examples, adding or subtracting it during inference to adjust behavior.",relation:"Behavioral direction control has precedents. CAA changes runtime activations; WSP's writing experiments modify stored weights."},
+ {id:'patch',year:2024,lane:0,short:"Patchscopes",title:'Patchscopes: A Unifying Framework for Inspecting Hidden Representations of Language Models',venue:"First public 2024",url:'https://arxiv.org/abs/2401.06102',method:"Patches hidden representations into another model computation and uses the generated language to explain them.",relation:"Model-assisted interpretation of internal information has precedents. The main objects are hidden representations, rather than weights themselves."},
+ {id:'maia',year:2024,lane:0,short:"MAIA",title:'A Multimodal Automated Interpretability Agent',venue:"First public 2024 · ICML 2024",url:'https://arxiv.org/abs/2404.14394',method:"A vision-language model calls tools, proposes hypotheses, and iterates on experiments to explain features and discover failure modes.",relation:"Autonomous agents analyzing models predate WSP. The analysis workflow is related, but programming target weights is not the core objective."},
+ {id:'direction',year:2024,lane:1,short:"Ablation",title:'Refusal in Language Models Is Mediated by a Single Direction',venue:"First public 2024 · NeurIPS 2024",url:'https://arxiv.org/abs/2406.11717',method:"Extracts a behavioral direction, applies directional ablation, and makes the intervention persistent through weight orthogonalization.",relation:"A close operational comparison for WSP's Qwen direction edit. WSP puts the LLM in charge of diagnosis, localization, and intervention selection."},
+ {id:'t2l',year:2025,lane:2,short:"Text-to-LoRA",title:'Text-to-LoRA: Instant Transformer Adaption',venue:"First public 2025 · ICML 2025",url:'https://arxiv.org/abs/2506.06105',method:"A specially trained hypernetwork generates a LoRA adapter in one forward pass from a natural-language task description.",relation:"Natural language to weight updates has precedents. It relies on a specially trained generator, unlike a general-purpose LLM autonomously analyzing and designing edits."},
+ {id:'wsp',year:2026,lane:3,short:"WSP",title:'Sparks of Weight-Space Programming',venue:"November 2, 2026 · Research blog",url:'https://rikiyat.github.io/blog/weight-space-programming/',method:"A general-purpose LLM reads, repairs, or constructs network weights around natural-language goals. Some experiments use forward-pass feedback.",relation:"Assigns analysis, editing, and construction to a general-purpose LLM. Target-weight edits do not use a gradient optimizer; this does not imply no examples, feedback, or experimental selection."}
+];
+const laneOverrides={learnopt:4,opro:4,maia:4,tracr:3,wsp:5};
+const labels={};
+papers.forEach(p=>{if(p.id in laneOverrides)p.lane=laneOverrides[p.id];if(labels[p.id])p.short=labels[p.id];});
+const order=['fast','learnopt','hyper','es','rewrite','rasp','mend','circuits','rome','soups','task','tracr','nfn','openai','actadd','opro','repe','caa','patch','maia','direction','thinkedit','t2l','weightsteer','d2l','adderboard','l2w','wsp'];
+papers.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
+const lanes = ['Mechanisms','Behavior editing','Weight generation','Network construction','Research & optimization'];
+function select(id,save=false) {
+ const p=papers.find(p=>p.id===id)||papers.find(p=>p.id==='adderboard');
+ root.querySelector('#wh-meta').textContent=p.venue+' · '+(lanes[p.lane]||'WSP itself')+(p.added?' · Later addition':'');
+ const title=root.querySelector('#wh-title'); title.textContent=p.title+' ↗'; title.href=p.url;
+ root.querySelector('#wh-method').textContent='Method: '+p.method;
+ root.querySelector('#wh-relation').textContent='Relation to WSP: '+p.relation;
+ root.querySelectorAll('button[data-paper]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.paper===p.id)));
+ if(save && window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{selectedPaper:p.title,year:p.year,url:p.url},privateContent:{id:p.id,revision:3}}).catch(()=>{});
+}
+const grouped=d3.groups(papers,p=>p.year).sort((a,b)=>a[0]-b[0]);
+const years=d3.select(root.querySelector('#wh-years')).selectAll('section').data(grouped).join('section').attr('class','wh-year');
+years.append('div').attr('class','wh-year-label tabular-nums').text(d=>d[0]);
+function addPaper(container,p) {
+ const entry=container.append('div').attr('class','wh-entry').style('--route-color',`var(--viz-series-${p.lane+1})`);
+ entry.append('span').attr('class','wh-dot'+(p.added?' wh-new':'')).attr('aria-hidden','true');
+ entry.append('button').attr('class','btn').attr('type','button').attr('data-paper',p.id).attr('aria-label',p.year+', '+p.title+(p.added?', Later addition':'')).attr('aria-pressed','false').text(p.short).on('click',()=>select(p.id,true));
+}
+years.each(function([year,items]) {
+ const row=d3.select(this);
+ lanes.forEach((label,i)=>{
+  const lane=row.append('div').attr('class','wh-lane');
+  const ps=items.filter(p=>p.lane===i);
+  if(ps.length) lane.append('span').attr('class','wh-mobile-label text-small text-muted').text(label);
+  ps.forEach(p=>addPaper(lane,p));
+ });
+ items.filter(p=>p.lane===5).forEach(p=>{
+  const merged=row.append('div').attr('class','wh-merge');
+  addPaper(merged,p);
+  merged.append('span').attr('class','text-small').text('November 2 · A general-purpose LLM reads, repairs, and constructs weights');
+ });
+});
+const saved=window.openai?.widgetState?.privateContent;
+select(saved?.revision===3?saved.id:'adderboard');
+window.addEventListener('openai:set_globals',e=>{const s=e.detail?.globals?.widgetState?.privateContent;if(s?.revision===3&&s.id)select(s.id);});
+})();
+</script>
