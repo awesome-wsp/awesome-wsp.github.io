@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://persistent.oaistatic.com/plugins/visualize/; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<meta name="description" content="Explore the research background of weight-space programming: 16 works across model interpretation, editing, and weight generation, 2016–2026.">
+<meta name="description" content="Explore the research background of weight-space programming: 27 works across interpretation, editing, weight generation, network construction, and automated research, 1992–2026.">
 <title>Awesome WSP · Research Timeline</title>
 <style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit;max-width:1100px;margin:0 auto;font-family:system-ui,sans-serif}header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin:12px 0 28px}header a{color:inherit;text-decoration:none}header nav{display:flex;gap:18px;font-size:14px}header strong{font-size:18px}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
 
@@ -1816,37 +1816,39 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;/script&gt;
 &lt;div id=&quot;wsp-history&quot;&gt;
   &lt;h2&gt;通向 WSP 的研究时间线&lt;/h2&gt;
-  &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;2016—2026 · 按首次公开年份分组 · 代表性工作，非直接引用关系&lt;/div&gt;
+  &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;1992—2026 · 27 项代表工作 · 5 条研究路线&lt;/div&gt;
   &lt;div class=&quot;card wh-detail&quot; aria-live=&quot;polite&quot;&gt;
     &lt;div class=&quot;text-small&quot; id=&quot;wh-meta&quot;&gt;&lt;/div&gt;
     &lt;a id=&quot;wh-title&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;/a&gt;
     &lt;div id=&quot;wh-method&quot;&gt;&lt;/div&gt;
     &lt;div id=&quot;wh-relation&quot;&gt;&lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;wh-head&quot; aria-hidden=&quot;true&quot;&gt;&lt;span&gt;年份&lt;/span&gt;&lt;span&gt;理解网络&lt;/span&gt;&lt;span&gt;编辑权重与行为&lt;/span&gt;&lt;span&gt;构造权重&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;wh-head&quot; aria-hidden=&quot;true&quot;&gt;&lt;span&gt;年份&lt;/span&gt;&lt;span&gt;读取机制&lt;/span&gt;&lt;span&gt;编辑行为&lt;/span&gt;&lt;span&gt;生成权重&lt;/span&gt;&lt;span&gt;构造网络&lt;/span&gt;&lt;span&gt;研究与优化&lt;/span&gt;&lt;/div&gt;
   &lt;div id=&quot;wh-years&quot; aria-label=&quot;按年份与研究方向排列的论文&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;年份间距不代表时长；路线分类用于阅读，不表示方法互斥。论文名称可点击。&lt;/div&gt;
+  &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;◆ 本次新增 11 项　● 原有工作 · 点击名称查看方法与原文&lt;/div&gt;
+  &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;按所列工作的首次公开年份分组；年份间距不代表时长。分类表示概念关联，不表示直接继承或概念首创。&lt;/div&gt;
 &lt;/div&gt;
 &lt;style&gt;
 #wsp-history { color:var(--foreground); }
 #wsp-history .wh-caption { margin-top:calc(var(--font-size-base)*.5); }
 #wsp-history .wh-detail { margin-top:var(--font-size-base); margin-bottom:var(--font-size-base); display:grid; gap:calc(var(--font-size-base)*.5); overflow-wrap:anywhere; }
-#wsp-history .wh-head, #wsp-history .wh-year { display:grid; grid-template-columns:54px repeat(3,minmax(0,1fr)); column-gap:calc(var(--font-size-base)*.7); }
+#wsp-history .wh-head, #wsp-history .wh-year { display:grid; grid-template-columns:48px repeat(5,minmax(0,1fr)); column-gap:calc(var(--font-size-base)*.5); }
 #wsp-history .wh-head { padding-bottom:calc(var(--font-size-base)*.7); border-bottom:1px solid var(--border); }
 #wsp-history .wh-year { padding-top:var(--font-size-base); padding-bottom:var(--font-size-base); border-bottom:1px solid var(--border); }
 #wsp-history .wh-year-label { font-weight:500; }
 #wsp-history .wh-lane { min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:calc(var(--font-size-base)*.65); }
 #wsp-history .wh-entry { display:flex; align-items:center; gap:calc(var(--font-size-base)*.35); max-width:100%; }
 #wsp-history .wh-dot { width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:var(--route-color); }
+#wsp-history .wh-new { border-radius:0; transform:rotate(45deg); }
 #wsp-history .wh-mobile-label { display:none; }
-#wsp-history .wh-merge { grid-column:2/5; display:flex; flex-direction:column; gap:calc(var(--font-size-base)*.5); align-items:flex-start; }
+#wsp-history .wh-merge { grid-column:2/7; display:flex; flex-wrap:wrap; gap:calc(var(--font-size-base)*.5); align-items:center; margin-top:var(--font-size-base); }
 #wsp-history .wh-merge-marks { display:flex; gap:6px; }
-@media(max-width:580px) {
+@media(max-width:680px) {
  #wsp-history .wh-head { display:none; }
  #wsp-history .wh-year { grid-template-columns:48px minmax(0,1fr); row-gap:var(--font-size-base); }
  #wsp-history .wh-lane { grid-column:2; }
  #wsp-history .wh-lane:empty { display:none; }
- #wsp-history .wh-year-label { grid-column:1; grid-row:1/5; }
+ #wsp-history .wh-year-label { grid-column:1; grid-row:1; }
  #wsp-history .wh-mobile-label { display:block; }
  #wsp-history .wh-merge { grid-column:2; }
 }
@@ -1858,6 +1860,17 @@ html&gt;body{padding:0}&lt;/style&gt;
 (() =&gt; {
 const root = document.getElementById(&#x27;wsp-history&#x27;);
 const papers = [
+ {id:&#x27;fast&#x27;,year:1992,lane:2,short:&#x27;快权重&#x27;,added:true,title:&#x27;Learning to Control Fast-Weight Memories: An Alternative to Dynamic Recurrent Networks&#x27;,venue:&#x27;1992 年 · Neural Computation&#x27;,url:&#x27;https://people.idsia.ch/~juergen/fastweights/&#x27;,method:&#x27;一个网络生成随上下文变化的权重更新，控制另一个网络的快速记忆；系统通过梯度训练。&#x27;,relation:&#x27;历史概念背景：网络编程另一个网络已有先例；不等同于通用 LLM 按自然语言目标编辑权重。&#x27;},
+ {id:&#x27;es&#x27;,year:2017,lane:4,short:&#x27;ES&#x27;,added:true,title:&#x27;Evolution Strategies as a Scalable Alternative to Reinforcement Learning&#x27;,venue:&#x27;2017 年 3 月 · 预印本&#x27;,url:&#x27;https://arxiv.org/abs/1703.03864&#x27;,method:&#x27;通过参数扰动及回报估计更新方向，用黑箱优化训练策略，无需穿过目标网络反向传播。&#x27;,relation:&#x27;优化背景：不对目标网络反向传播不是新概念；ES 依赖随机搜索与反馈，不以 LLM 的机制分析决定编辑。&#x27;},
+ {id:&#x27;rewrite&#x27;,year:2020,lane:1,short:&#x27;模型重写&#x27;,added:true,title:&#x27;Rewriting a Deep Generative Model&#x27;,venue:&#x27;2020 年 7 月首次公开 · ECCV 2020&#x27;,url:&#x27;https://arxiv.org/abs/2007.15646&#x27;,method:&#x27;将生成模型的一层视为线性关联记忆，局部改写其中编码的生成规则。&#x27;,relation:&#x27;编辑方法背景：从修改输出转向修改模型内部规则；研究者设计编辑算法，不由通用 LLM 自主提出。&#x27;},
+ {id:&#x27;rasp&#x27;,year:2021,lane:3,short:&#x27;RASP&#x27;,added:true,title:&#x27;Thinking Like Transformers&#x27;,venue:&#x27;2021 年 6 月首次公开 · ICML 2021&#x27;,url:&#x27;https://arxiv.org/abs/2106.06981&#x27;,method:&#x27;提出 RASP，以注意力和前馈计算的抽象原语表达计数、排序等程序。&#x27;,relation:&#x27;构造路线背景：将算法表达为 Transformer 可实现的计算；RASP 本身不是直接输出权重的编译器。&#x27;},
+ {id:&#x27;soups&#x27;,year:2022,lane:1,short:&#x27;Model Soups&#x27;,added:true,title:&#x27;Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time&#x27;,venue:&#x27;2022 年 3 月首次公开 · ICML 2022&#x27;,url:&#x27;https://arxiv.org/abs/2203.05482&#x27;,method:&#x27;平均多个从相同预训练模型微调所得的权重，合并成一个模型。&#x27;,relation:&#x27;权重算术背景：直接组合已训练权重；所需能力来自微调结果，不是 LLM 推理构造的修改。&#x27;},
+ {id:&#x27;actadd&#x27;,year:2023,lane:1,short:&#x27;ActAdd&#x27;,added:true,title:&#x27;Steering Language Models With Activation Engineering&#x27;,venue:&#x27;2023 年 8 月首次公开 · 预印本&#x27;,url:&#x27;https://arxiv.org/abs/2308.10248&#x27;,method:&#x27;由对照提示的中间激活差构造行为方向，在前向运行时加入该方向。&#x27;,relation:&#x27;方向干预近邻：控制运行时激活；不把干预永久写入权重，与权重正交化应区分。&#x27;},
+ {id:&#x27;repe&#x27;,year:2023,lane:0,short:&#x27;RepE&#x27;,added:true,title:&#x27;Representation Engineering: A Top-Down Approach to AI Transparency&#x27;,venue:&#x27;2023 年 10 月首次公开 · 预印本&#x27;,url:&#x27;https://arxiv.org/abs/2310.01405&#x27;,method:&#x27;以群体表征而非单个神经元为分析单位，读取和干预高层行为相关的内部表示。&#x27;,relation:&#x27;表征分析与控制近邻：帮助理解行为方向从何而来；不等同于让通用 LLM 自主读写权重。&#x27;},
+ {id:&#x27;thinkedit&#x27;,year:2025,lane:1,short:&#x27;ThinkEdit&#x27;,added:true,title:&#x27;ThinkEdit: Interpretable Weight Editing to Mitigate Overly Short Thinking in Reasoning Models&#x27;,venue:&#x27;2025 年 3 月首次公开 · EMNLP 2025&#x27;,url:&#x27;https://aclanthology.org/2025.emnlp-main.861/&#x27;,method:&#x27;从长短推理激活提取方向，定位短推理注意力头，再正交化输出权重；编辑不经梯度优化器。&#x27;,relation:&#x27;Qwen 实验的直接方法近邻：均以局部权重干预修复推理；ThinkEdit 处理过短思考，WSP 处理重复循环，且由 LLM 组织诊断和编辑。&#x27;},
+ {id:&#x27;weightsteer&#x27;,year:2025,lane:1,short:&#x27;权重引导&#x27;,added:true,title:&#x27;Steering Language Models with Weight Arithmetic&#x27;,venue:&#x27;2025 年 11 月首次公开 · ICLR 2026&#x27;,url:&#x27;https://arxiv.org/abs/2511.05408&#x27;,method:&#x27;分别微调出正反行为，以两个权重更新之差构造方向，再加减该方向以引导行为。&#x27;,relation:&#x27;权重方向编辑近邻：连接任务向量与行为引导；方向来自两次微调，不能归为全过程无训练。&#x27;},
+ {id:&#x27;d2l&#x27;,year:2026,lane:2,short:&#x27;Doc-to-LoRA&#x27;,added:true,title:&#x27;Doc-to-LoRA: Learning to Instantly Internalize Contexts&#x27;,venue:&#x27;2026 年 2 月 · 预印本&#x27;,url:&#x27;https://arxiv.org/abs/2602.15902&#x27;,method:&#x27;专门训练超网络，将文档上下文一次前向转成 LoRA，后续问答可不再读取原上下文。&#x27;,relation:&#x27;生成权重近邻：外部信息直接进入参数；依赖训练出的摊销生成器，不是通用 LLM 自主分析权重。&#x27;},
+ {id:&#x27;l2w&#x27;,year:2026,lane:1,short:&#x27;L2W&#x27;,added:true,title:&#x27;From Latents to Wires: Surgical Post-Editing on Large Language Models&#x27;,venue:&#x27;2026 年 9 月 · 预印本&#x27;,url:&#x27;https://arxiv.org/abs/2609.32434&#x27;,method:&#x27;用 Jacobian lens 定位语义目标相关组件，再以反例驱动的关闭与重开过程执行局部后编辑。&#x27;,relation:&#x27;目标驱动编辑流程近邻：定位、干预、验证形成循环；定位涉及 Jacobian，不应标为全过程无梯度。&#x27;},
  {id:&#x27;learnopt&#x27;,year:2016,lane:1,short:&#x27;Learned Optimizer&#x27;,title:&#x27;Learning to learn by gradient descent by gradient descent&#x27;,venue:&#x27;2016 年首次公开&#x27;,url:&#x27;https://arxiv.org/abs/1606.04474&#x27;,method:&#x27;训练 LSTM 学习参数更新规则，让优化器本身也可以被学习。&#x27;,relation:&#x27;已有“网络决定网络如何更新”；依赖专门训练与梯度，区别于通用 LLM 的推理编辑。&#x27;},
  {id:&#x27;hyper&#x27;,year:2016,lane:2,short:&#x27;HyperNetworks&#x27;,title:&#x27;HyperNetworks&#x27;,venue:&#x27;2016 年首次公开&#x27;,url:&#x27;https://arxiv.org/abs/1609.09106&#x27;,method:&#x27;训练一个网络，为另一个网络生成权重。&#x27;,relation:&#x27;网络生成网络权重已有先例；WSP 考察通用 LLM 已有的权重读写能力。&#x27;},
  {id:&#x27;mend&#x27;,year:2021,lane:1,short:&#x27;MEND&#x27;,title:&#x27;Fast Model Editing at Scale&#x27;,venue:&#x27;2021 年预印本 · ICLR 2022&#x27;,url:&#x27;https://arxiv.org/abs/2110.11309&#x27;,method:&#x27;训练辅助编辑网络，变换目标模型的梯度，产生快速局部修改。&#x27;,relation:&#x27;已有模型编辑模型；MEND 的编辑器专门训练，且编辑依赖目标模型梯度。&#x27;},
@@ -1873,43 +1886,48 @@ const papers = [
  {id:&#x27;maia&#x27;,year:2024,lane:0,short:&#x27;MAIA&#x27;,title:&#x27;A Multimodal Automated Interpretability Agent&#x27;,venue:&#x27;2024 年首次公开 · ICML 2024&#x27;,url:&#x27;https://arxiv.org/abs/2404.14394&#x27;,method:&#x27;视觉语言模型调用工具、提出假设并迭代实验，解释特征和发现失败模式。&#x27;,relation:&#x27;已有自主分析模型的 Agent；与 WSP 的分析流程接近，但核心不是编程目标权重。&#x27;},
  {id:&#x27;direction&#x27;,year:2024,lane:1,short:&#x27;单方向消融&#x27;,title:&#x27;Refusal in Language Models Is Mediated by a Single Direction&#x27;,venue:&#x27;2024 年首次公开 · NeurIPS 2024&#x27;,url:&#x27;https://arxiv.org/abs/2406.11717&#x27;,method:&#x27;提取行为方向，进行方向消融，并用权重正交化把干预固化。&#x27;,relation:&#x27;WSP 中 Qwen 方向编辑的直接操作近邻；WSP 由 LLM 主导诊断、定位和干预选择。&#x27;},
  {id:&#x27;t2l&#x27;,year:2025,lane:2,short:&#x27;Text-to-LoRA&#x27;,title:&#x27;Text-to-LoRA: Instant Transformer Adaption&#x27;,venue:&#x27;2025 年首次公开 · ICML 2025&#x27;,url:&#x27;https://arxiv.org/abs/2506.06105&#x27;,method:&#x27;专门训练超网络，根据自然语言任务描述，一次前向生成 LoRA 适配器。&#x27;,relation:&#x27;已有“自然语言→权重更新”；依赖专门训练的生成器，区别于通用 LLM 自主分析和设计编辑。&#x27;},
- {id:&#x27;wsp&#x27;,year:2026,lane:3,short:&#x27;Weight-Space Programming&#x27;,title:&#x27;Sparks of Weight-Space Programming&#x27;,venue:&#x27;2026 年 11 月 2 日 · 研究博客&#x27;,url:&#x27;https://rikiyat.github.io/blog/weight-space-programming/&#x27;,method:&#x27;通用 LLM 围绕自然语言目标读取、修复或构造网络权重，部分实验使用前向反馈。&#x27;,relation:&#x27;汇合分析、编辑与构造三条路线；目标网络编辑不用梯度优化器，尚非普遍替代训练的证据。&#x27;}
+ {id:&#x27;wsp&#x27;,year:2026,lane:3,short:&#x27;Weight-Space Programming&#x27;,title:&#x27;Sparks of Weight-Space Programming&#x27;,venue:&#x27;2026 年 11 月 2 日 · 研究博客&#x27;,url:&#x27;https://rikiyat.github.io/blog/weight-space-programming/&#x27;,method:&#x27;通用 LLM 围绕自然语言目标读取、修复或构造网络权重，部分实验使用前向反馈。&#x27;,relation:&#x27;把分析、编辑与构造交给通用 LLM；目标网络编辑不用梯度优化器，不代表不使用样本、反馈或试验选择。&#x27;}
 ];
-const lanes = [&#x27;理解网络&#x27;,&#x27;编辑权重与行为&#x27;,&#x27;构造权重&#x27;];
+const laneOverrides={learnopt:4,opro:4,maia:4,tracr:3,wsp:5};
+const labels={learnopt:&#x27;学习型优化器&#x27;,hyper:&#x27;Hypernets&#x27;,circuits:&#x27;Circuits&#x27;,task:&#x27;任务算术&#x27;,nfn:&#x27;NFN&#x27;,openai:&#x27;神经元解释&#x27;,caa:&#x27;CAA&#x27;,t2l:&#x27;Text-to-LoRA&#x27;,wsp:&#x27;WSP&#x27;};
+papers.forEach(p=&gt;{if(p.id in laneOverrides)p.lane=laneOverrides[p.id];if(labels[p.id])p.short=labels[p.id];});
+const order=[&#x27;fast&#x27;,&#x27;learnopt&#x27;,&#x27;hyper&#x27;,&#x27;es&#x27;,&#x27;rewrite&#x27;,&#x27;rasp&#x27;,&#x27;mend&#x27;,&#x27;circuits&#x27;,&#x27;rome&#x27;,&#x27;soups&#x27;,&#x27;task&#x27;,&#x27;tracr&#x27;,&#x27;nfn&#x27;,&#x27;openai&#x27;,&#x27;actadd&#x27;,&#x27;opro&#x27;,&#x27;repe&#x27;,&#x27;caa&#x27;,&#x27;patch&#x27;,&#x27;maia&#x27;,&#x27;direction&#x27;,&#x27;thinkedit&#x27;,&#x27;t2l&#x27;,&#x27;weightsteer&#x27;,&#x27;d2l&#x27;,&#x27;l2w&#x27;,&#x27;wsp&#x27;];
+papers.sort((a,b)=&gt;order.indexOf(a.id)-order.indexOf(b.id));
+const lanes = [&#x27;读取机制&#x27;,&#x27;编辑行为&#x27;,&#x27;生成权重&#x27;,&#x27;构造网络&#x27;,&#x27;研究与优化&#x27;];
 function select(id,save=false) {
- const p=papers.find(p=&gt;p.id===id)||papers[5];
- root.querySelector(&#x27;#wh-meta&#x27;).textContent=p.venue;
+ const p=papers.find(p=&gt;p.id===id)||papers.find(p=&gt;p.id===&#x27;thinkedit&#x27;);
+ root.querySelector(&#x27;#wh-meta&#x27;).textContent=p.venue+&#x27; · &#x27;+(lanes[p.lane]||&#x27;WSP 研究对象&#x27;)+(p.added?&#x27; · 本次新增&#x27;:&#x27;&#x27;);
  const title=root.querySelector(&#x27;#wh-title&#x27;); title.textContent=p.title+&#x27; ↗&#x27;; title.href=p.url;
  root.querySelector(&#x27;#wh-method&#x27;).textContent=&#x27;方法：&#x27;+p.method;
  root.querySelector(&#x27;#wh-relation&#x27;).textContent=&#x27;与 WSP 的关系：&#x27;+p.relation;
  root.querySelectorAll(&#x27;button[data-paper]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b.dataset.paper===p.id)));
- if(save &amp;&amp; window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{selectedPaper:p.title,year:p.year,url:p.url},privateContent:{id:p.id}}).catch(()=&gt;{});
+ if(save &amp;&amp; window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{selectedPaper:p.title,year:p.year,url:p.url},privateContent:{id:p.id,revision:2}}).catch(()=&gt;{});
 }
 const grouped=d3.groups(papers,p=&gt;p.year).sort((a,b)=&gt;a[0]-b[0]);
 const years=d3.select(root.querySelector(&#x27;#wh-years&#x27;)).selectAll(&#x27;section&#x27;).data(grouped).join(&#x27;section&#x27;).attr(&#x27;class&#x27;,&#x27;wh-year&#x27;);
 years.append(&#x27;div&#x27;).attr(&#x27;class&#x27;,&#x27;wh-year-label tabular-nums&#x27;).text(d=&gt;d[0]);
 function addPaper(container,p) {
- const entry=container.append(&#x27;div&#x27;).attr(&#x27;class&#x27;,&#x27;wh-entry&#x27;).style(&#x27;--route-color&#x27;,`var(--viz-series-${Math.min(p.lane,2)+1})`);
- entry.append(&#x27;span&#x27;).attr(&#x27;class&#x27;,&#x27;wh-dot&#x27;).attr(&#x27;aria-hidden&#x27;,&#x27;true&#x27;);
- entry.append(&#x27;button&#x27;).attr(&#x27;class&#x27;,&#x27;btn&#x27;).attr(&#x27;type&#x27;,&#x27;button&#x27;).attr(&#x27;data-paper&#x27;,p.id).attr(&#x27;aria-label&#x27;,p.year+&#x27;，&#x27;+p.title).attr(&#x27;aria-pressed&#x27;,&#x27;false&#x27;).text(p.short).on(&#x27;click&#x27;,()=&gt;select(p.id,true));
+ const entry=container.append(&#x27;div&#x27;).attr(&#x27;class&#x27;,&#x27;wh-entry&#x27;).style(&#x27;--route-color&#x27;,`var(--viz-series-${p.lane+1})`);
+ entry.append(&#x27;span&#x27;).attr(&#x27;class&#x27;,&#x27;wh-dot&#x27;+(p.added?&#x27; wh-new&#x27;:&#x27;&#x27;)).attr(&#x27;aria-hidden&#x27;,&#x27;true&#x27;);
+ entry.append(&#x27;button&#x27;).attr(&#x27;class&#x27;,&#x27;btn&#x27;).attr(&#x27;type&#x27;,&#x27;button&#x27;).attr(&#x27;data-paper&#x27;,p.id).attr(&#x27;aria-label&#x27;,p.year+&#x27;，&#x27;+p.title+(p.added?&#x27;，本次新增&#x27;:&#x27;&#x27;)).attr(&#x27;aria-pressed&#x27;,&#x27;false&#x27;).text(p.short).on(&#x27;click&#x27;,()=&gt;select(p.id,true));
 }
 years.each(function([year,items]) {
  const row=d3.select(this);
- if(year===2026){
-  const merged=row.append(&#x27;div&#x27;).attr(&#x27;class&#x27;,&#x27;wh-merge&#x27;);
-  const marks=merged.append(&#x27;div&#x27;).attr(&#x27;class&#x27;,&#x27;wh-merge-marks&#x27;).attr(&#x27;aria-hidden&#x27;,&#x27;true&#x27;);
-  lanes.forEach((_,i)=&gt;marks.append(&#x27;span&#x27;).attr(&#x27;class&#x27;,&#x27;wh-dot&#x27;).style(&#x27;--route-color&#x27;,`var(--viz-series-${i+1})`));
-  addPaper(merged,items[0]); return;
- }
  lanes.forEach((label,i)=&gt;{
   const lane=row.append(&#x27;div&#x27;).attr(&#x27;class&#x27;,&#x27;wh-lane&#x27;);
   const ps=items.filter(p=&gt;p.lane===i);
   if(ps.length) lane.append(&#x27;span&#x27;).attr(&#x27;class&#x27;,&#x27;wh-mobile-label text-small text-muted&#x27;).text(label);
   ps.forEach(p=&gt;addPaper(lane,p));
  });
+ items.filter(p=&gt;p.lane===5).forEach(p=&gt;{
+  const merged=row.append(&#x27;div&#x27;).attr(&#x27;class&#x27;,&#x27;wh-merge&#x27;);
+  addPaper(merged,p);
+  merged.append(&#x27;span&#x27;).attr(&#x27;class&#x27;,&#x27;text-small&#x27;).text(&#x27;11 月 2 日 · 通用 LLM 读取、修复与构造权重&#x27;);
+ });
 });
-select(window.openai?.widgetState?.privateContent?.id||&#x27;task&#x27;);
-window.addEventListener(&#x27;openai:set_globals&#x27;,e=&gt;{const id=e.detail?.globals?.widgetState?.privateContent?.id;if(id)select(id);});
+const saved=window.openai?.widgetState?.privateContent;
+select(saved?.revision===2?saved.id:&#x27;thinkedit&#x27;);
+window.addEventListener(&#x27;openai:set_globals&#x27;,e=&gt;{const s=e.detail?.globals?.widgetState?.privateContent;if(s?.revision===2&amp;&amp;s.id)select(s.id);});
 })();
 &lt;/script&gt;
 

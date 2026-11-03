@@ -1,12 +1,16 @@
 # Awesome WSP — Research Timeline
 
-Interactive research background for weight-space programming, covering 16 representative works from 2016 to 2026.
+Interactive research background for weight-space programming, covering 27 representative works from 1992 to 2026.
 
 - Website: https://awesome-wsp.github.io/
 - Resource library: https://github.com/brighterr/awesome-wsp
 - Click a paper to see its method, relationship to WSP, and primary source.
 - Dates use first public release, with conference years separately labeled.
 - Categories indicate conceptual relationships, not proven direct influence or citations.
+
+## Research update — 2026-11-03
+
+The expanded view adds 11 works, marks additions with diamonds, and separates five conceptual routes. See [RESEARCH_NOTES.md](RESEARCH_NOTES.md) for inclusion decisions and methodological caveats. The editable diagram source is [timeline.fragment.html](timeline.fragment.html).
 
 ## Hosting
 

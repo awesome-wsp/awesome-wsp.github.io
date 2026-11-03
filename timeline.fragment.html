@@ -1,0 +1,114 @@
+<div id="wsp-history">
+  <h2>通向 WSP 的研究时间线</h2>
+  <div class="text-small text-muted wh-caption">1992—2026 · 27 项代表工作 · 5 条研究路线</div>
+  <div class="card wh-detail" aria-live="polite">
+    <div class="text-small" id="wh-meta"></div>
+    <a id="wh-title" target="_blank" rel="noopener noreferrer"></a>
+    <div id="wh-method"></div>
+    <div id="wh-relation"></div>
+  </div>
+  <div class="wh-head" aria-hidden="true"><span>年份</span><span>读取机制</span><span>编辑行为</span><span>生成权重</span><span>构造网络</span><span>研究与优化</span></div>
+  <div id="wh-years" aria-label="按年份与研究方向排列的论文"></div>
+  <div class="text-small text-muted wh-caption">◆ 本次新增 11 项　● 原有工作 · 点击名称查看方法与原文</div>
+  <div class="text-small text-muted wh-caption">按所列工作的首次公开年份分组；年份间距不代表时长。分类表示概念关联，不表示直接继承或概念首创。</div>
+</div>
+<style>
+#wsp-history { color:var(--foreground); }
+#wsp-history .wh-caption { margin-top:calc(var(--font-size-base)*.5); }
+#wsp-history .wh-detail { margin-top:var(--font-size-base); margin-bottom:var(--font-size-base); display:grid; gap:calc(var(--font-size-base)*.5); overflow-wrap:anywhere; }
+#wsp-history .wh-head, #wsp-history .wh-year { display:grid; grid-template-columns:48px repeat(5,minmax(0,1fr)); column-gap:calc(var(--font-size-base)*.5); }
+#wsp-history .wh-head { padding-bottom:calc(var(--font-size-base)*.7); border-bottom:1px solid var(--border); }
+#wsp-history .wh-year { padding-top:var(--font-size-base); padding-bottom:var(--font-size-base); border-bottom:1px solid var(--border); }
+#wsp-history .wh-year-label { font-weight:500; }
+#wsp-history .wh-lane { min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:calc(var(--font-size-base)*.65); }
+#wsp-history .wh-entry { display:flex; align-items:center; gap:calc(var(--font-size-base)*.35); max-width:100%; }
+#wsp-history .wh-dot { width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:var(--route-color); }
+#wsp-history .wh-new { border-radius:0; transform:rotate(45deg); }
+#wsp-history .wh-mobile-label { display:none; }
+#wsp-history .wh-merge { grid-column:2/7; display:flex; flex-wrap:wrap; gap:calc(var(--font-size-base)*.5); align-items:center; margin-top:var(--font-size-base); }
+#wsp-history .wh-merge-marks { display:flex; gap:6px; }
+@media(max-width:680px) {
+ #wsp-history .wh-head { display:none; }
+ #wsp-history .wh-year { grid-template-columns:48px minmax(0,1fr); row-gap:var(--font-size-base); }
+ #wsp-history .wh-lane { grid-column:2; }
+ #wsp-history .wh-lane:empty { display:none; }
+ #wsp-history .wh-year-label { grid-column:1; grid-row:1; }
+ #wsp-history .wh-mobile-label { display:block; }
+ #wsp-history .wh-merge { grid-column:2; }
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script>
+(() => {
+const root = document.getElementById('wsp-history');
+const papers = [
+ {id:'fast',year:1992,lane:2,short:'快权重',added:true,title:'Learning to Control Fast-Weight Memories: An Alternative to Dynamic Recurrent Networks',venue:'1992 年 · Neural Computation',url:'https://people.idsia.ch/~juergen/fastweights/',method:'一个网络生成随上下文变化的权重更新，控制另一个网络的快速记忆；系统通过梯度训练。',relation:'历史概念背景：网络编程另一个网络已有先例；不等同于通用 LLM 按自然语言目标编辑权重。'},
+ {id:'es',year:2017,lane:4,short:'ES',added:true,title:'Evolution Strategies as a Scalable Alternative to Reinforcement Learning',venue:'2017 年 3 月 · 预印本',url:'https://arxiv.org/abs/1703.03864',method:'通过参数扰动及回报估计更新方向，用黑箱优化训练策略，无需穿过目标网络反向传播。',relation:'优化背景：不对目标网络反向传播不是新概念；ES 依赖随机搜索与反馈，不以 LLM 的机制分析决定编辑。'},
+ {id:'rewrite',year:2020,lane:1,short:'模型重写',added:true,title:'Rewriting a Deep Generative Model',venue:'2020 年 7 月首次公开 · ECCV 2020',url:'https://arxiv.org/abs/2007.15646',method:'将生成模型的一层视为线性关联记忆，局部改写其中编码的生成规则。',relation:'编辑方法背景：从修改输出转向修改模型内部规则；研究者设计编辑算法，不由通用 LLM 自主提出。'},
+ {id:'rasp',year:2021,lane:3,short:'RASP',added:true,title:'Thinking Like Transformers',venue:'2021 年 6 月首次公开 · ICML 2021',url:'https://arxiv.org/abs/2106.06981',method:'提出 RASP，以注意力和前馈计算的抽象原语表达计数、排序等程序。',relation:'构造路线背景：将算法表达为 Transformer 可实现的计算；RASP 本身不是直接输出权重的编译器。'},
+ {id:'soups',year:2022,lane:1,short:'Model Soups',added:true,title:'Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time',venue:'2022 年 3 月首次公开 · ICML 2022',url:'https://arxiv.org/abs/2203.05482',method:'平均多个从相同预训练模型微调所得的权重，合并成一个模型。',relation:'权重算术背景：直接组合已训练权重；所需能力来自微调结果，不是 LLM 推理构造的修改。'},
+ {id:'actadd',year:2023,lane:1,short:'ActAdd',added:true,title:'Steering Language Models With Activation Engineering',venue:'2023 年 8 月首次公开 · 预印本',url:'https://arxiv.org/abs/2308.10248',method:'由对照提示的中间激活差构造行为方向，在前向运行时加入该方向。',relation:'方向干预近邻：控制运行时激活；不把干预永久写入权重，与权重正交化应区分。'},
+ {id:'repe',year:2023,lane:0,short:'RepE',added:true,title:'Representation Engineering: A Top-Down Approach to AI Transparency',venue:'2023 年 10 月首次公开 · 预印本',url:'https://arxiv.org/abs/2310.01405',method:'以群体表征而非单个神经元为分析单位，读取和干预高层行为相关的内部表示。',relation:'表征分析与控制近邻：帮助理解行为方向从何而来；不等同于让通用 LLM 自主读写权重。'},
+ {id:'thinkedit',year:2025,lane:1,short:'ThinkEdit',added:true,title:'ThinkEdit: Interpretable Weight Editing to Mitigate Overly Short Thinking in Reasoning Models',venue:'2025 年 3 月首次公开 · EMNLP 2025',url:'https://aclanthology.org/2025.emnlp-main.861/',method:'从长短推理激活提取方向，定位短推理注意力头，再正交化输出权重；编辑不经梯度优化器。',relation:'Qwen 实验的直接方法近邻：均以局部权重干预修复推理；ThinkEdit 处理过短思考，WSP 处理重复循环，且由 LLM 组织诊断和编辑。'},
+ {id:'weightsteer',year:2025,lane:1,short:'权重引导',added:true,title:'Steering Language Models with Weight Arithmetic',venue:'2025 年 11 月首次公开 · ICLR 2026',url:'https://arxiv.org/abs/2511.05408',method:'分别微调出正反行为，以两个权重更新之差构造方向，再加减该方向以引导行为。',relation:'权重方向编辑近邻：连接任务向量与行为引导；方向来自两次微调，不能归为全过程无训练。'},
+ {id:'d2l',year:2026,lane:2,short:'Doc-to-LoRA',added:true,title:'Doc-to-LoRA: Learning to Instantly Internalize Contexts',venue:'2026 年 2 月 · 预印本',url:'https://arxiv.org/abs/2602.15902',method:'专门训练超网络，将文档上下文一次前向转成 LoRA，后续问答可不再读取原上下文。',relation:'生成权重近邻：外部信息直接进入参数；依赖训练出的摊销生成器，不是通用 LLM 自主分析权重。'},
+ {id:'l2w',year:2026,lane:1,short:'L2W',added:true,title:'From Latents to Wires: Surgical Post-Editing on Large Language Models',venue:'2026 年 9 月 · 预印本',url:'https://arxiv.org/abs/2609.32434',method:'用 Jacobian lens 定位语义目标相关组件，再以反例驱动的关闭与重开过程执行局部后编辑。',relation:'目标驱动编辑流程近邻：定位、干预、验证形成循环；定位涉及 Jacobian，不应标为全过程无梯度。'},
+ {id:'learnopt',year:2016,lane:1,short:'Learned Optimizer',title:'Learning to learn by gradient descent by gradient descent',venue:'2016 年首次公开',url:'https://arxiv.org/abs/1606.04474',method:'训练 LSTM 学习参数更新规则，让优化器本身也可以被学习。',relation:'已有“网络决定网络如何更新”；依赖专门训练与梯度，区别于通用 LLM 的推理编辑。'},
+ {id:'hyper',year:2016,lane:2,short:'HyperNetworks',title:'HyperNetworks',venue:'2016 年首次公开',url:'https://arxiv.org/abs/1609.09106',method:'训练一个网络，为另一个网络生成权重。',relation:'网络生成网络权重已有先例；WSP 考察通用 LLM 已有的权重读写能力。'},
+ {id:'mend',year:2021,lane:1,short:'MEND',title:'Fast Model Editing at Scale',venue:'2021 年预印本 · ICLR 2022',url:'https://arxiv.org/abs/2110.11309',method:'训练辅助编辑网络，变换目标模型的梯度，产生快速局部修改。',relation:'已有模型编辑模型；MEND 的编辑器专门训练，且编辑依赖目标模型梯度。'},
+ {id:'circuits',year:2021,lane:0,short:'Transformer Circuits',title:'A Mathematical Framework for Transformer Circuits',venue:'2021 年研究文章',url:'https://transformer-circuits.pub/2021/framework/index.html',method:'用残差流与 QK、OV 矩阵组合解释小型 Transformer 的计算电路。',relation:'为从权重推断计算提供框架；WSP 尝试让 LLM 自主执行相关分析。'},
+ {id:'rome',year:2022,lane:1,short:'ROME',title:'Locating and Editing Factual Associations in GPT',venue:'2022 年首次公开 · NeurIPS 2022',url:'https://arxiv.org/abs/2202.05262',method:'通过因果干预定位事实回忆，再对 MLP 权重做秩一编辑。',relation:'已有“定位机制→局部改权重”；ROME 使用专门算法，WSP 让 LLM 主导方案设计。'},
+ {id:'task',year:2022,lane:1,short:'Task Arithmetic',title:'Editing Models with Task Arithmetic',venue:'2022 年预印本 · ICLR 2023',url:'https://arxiv.org/abs/2212.04089',method:'微调后权重减去原始权重得到任务向量，再加减、缩放或组合它们。',relation:'已有权重方向编辑；任务向量来自微调，而 WSP 的修改量来自 LLM 设计的操作。'},
+ {id:'tracr',year:2023,lane:2,short:'Tracr',title:'Tracr: Compiled Transformers as a Laboratory for Interpretability',venue:'2023 年首次公开 · NeurIPS 2023',url:'https://arxiv.org/abs/2301.05062',method:'把 RASP 形式程序编译成实现计数、排序等计算的 Transformer 权重。',relation:'已有不训练目标网络的权重构造；WSP 尝试让 LLM 从任务描述设计计算并写入权重。'},
+ {id:'nfn',year:2023,lane:0,short:'Neural Functionals',title:'Permutation Equivariant Neural Functionals',venue:'2023 年首次公开 · NeurIPS 2023',url:'https://arxiv.org/abs/2302.14040',method:'设计尊重神经元置换对称性的网络，处理其他网络的权重或梯度。',relation:'已有把权重作为数据来分析或变换的模型；使用专门架构与训练。'},
+ {id:'openai',year:2023,lane:0,short:'GPT-4 神经元解释',title:'Language models can explain neurons in language models',venue:'2023 年 5 月 · OpenAI 研究文章',url:'https://openai.com/index/language-models-can-explain-neurons-in-language-models/',method:'GPT-4 从文本与激活样本提出神经元解释，再用激活预测检验解释。',relation:'已有通用 LLM 解释模型；核心证据是激活样本，核心产物是解释，而非权重编辑。'},
+ {id:'opro',year:2023,lane:1,short:'OPRO',title:'Large Language Models as Optimizers',venue:'2023 年预印本 · ICLR 2024',url:'https://arxiv.org/abs/2309.03409',method:'LLM 根据目标、历史候选及分数提出新候选，迭代优化，主要应用于提示词。',relation:'已有“提出→评估→修改”的外层循环；WSP 把操作对象扩展到权重及权重编辑程序。'},
+ {id:'caa',year:2023,lane:1,short:'CAA / Steering',title:'Steering Llama 2 via Contrastive Activation Addition',venue:'2023 年预印本 · ACL 2024',url:'https://arxiv.org/abs/2312.06681',method:'从正负行为样本的激活差提取方向，在推理时加减它来调节行为。',relation:'已有行为方向控制；CAA 修改运行时激活，WSP 的写入实验修改保存的权重。'},
+ {id:'patch',year:2024,lane:0,short:'Patchscopes',title:'Patchscopes: A Unifying Framework for Inspecting Hidden Representations of Language Models',venue:'2024 年首次公开',url:'https://arxiv.org/abs/2401.06102',method:'将隐藏表示接入另一段模型计算，用生成的语言解释表示。',relation:'已有借助模型解读内部信息的框架；主要对象是隐藏表示，而不是权重本身。'},
+ {id:'maia',year:2024,lane:0,short:'MAIA',title:'A Multimodal Automated Interpretability Agent',venue:'2024 年首次公开 · ICML 2024',url:'https://arxiv.org/abs/2404.14394',method:'视觉语言模型调用工具、提出假设并迭代实验，解释特征和发现失败模式。',relation:'已有自主分析模型的 Agent；与 WSP 的分析流程接近，但核心不是编程目标权重。'},
+ {id:'direction',year:2024,lane:1,short:'单方向消融',title:'Refusal in Language Models Is Mediated by a Single Direction',venue:'2024 年首次公开 · NeurIPS 2024',url:'https://arxiv.org/abs/2406.11717',method:'提取行为方向，进行方向消融，并用权重正交化把干预固化。',relation:'WSP 中 Qwen 方向编辑的直接操作近邻；WSP 由 LLM 主导诊断、定位和干预选择。'},
+ {id:'t2l',year:2025,lane:2,short:'Text-to-LoRA',title:'Text-to-LoRA: Instant Transformer Adaption',venue:'2025 年首次公开 · ICML 2025',url:'https://arxiv.org/abs/2506.06105',method:'专门训练超网络，根据自然语言任务描述，一次前向生成 LoRA 适配器。',relation:'已有“自然语言→权重更新”；依赖专门训练的生成器，区别于通用 LLM 自主分析和设计编辑。'},
+ {id:'wsp',year:2026,lane:3,short:'Weight-Space Programming',title:'Sparks of Weight-Space Programming',venue:'2026 年 11 月 2 日 · 研究博客',url:'https://rikiyat.github.io/blog/weight-space-programming/',method:'通用 LLM 围绕自然语言目标读取、修复或构造网络权重，部分实验使用前向反馈。',relation:'把分析、编辑与构造交给通用 LLM；目标网络编辑不用梯度优化器，不代表不使用样本、反馈或试验选择。'}
+];
+const laneOverrides={learnopt:4,opro:4,maia:4,tracr:3,wsp:5};
+const labels={learnopt:'学习型优化器',hyper:'Hypernets',circuits:'Circuits',task:'任务算术',nfn:'NFN',openai:'神经元解释',caa:'CAA',t2l:'Text-to-LoRA',wsp:'WSP'};
+papers.forEach(p=>{if(p.id in laneOverrides)p.lane=laneOverrides[p.id];if(labels[p.id])p.short=labels[p.id];});
+const order=['fast','learnopt','hyper','es','rewrite','rasp','mend','circuits','rome','soups','task','tracr','nfn','openai','actadd','opro','repe','caa','patch','maia','direction','thinkedit','t2l','weightsteer','d2l','l2w','wsp'];
+papers.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
+const lanes = ['读取机制','编辑行为','生成权重','构造网络','研究与优化'];
+function select(id,save=false) {
+ const p=papers.find(p=>p.id===id)||papers.find(p=>p.id==='thinkedit');
+ root.querySelector('#wh-meta').textContent=p.venue+' · '+(lanes[p.lane]||'WSP 研究对象')+(p.added?' · 本次新增':'');
+ const title=root.querySelector('#wh-title'); title.textContent=p.title+' ↗'; title.href=p.url;
+ root.querySelector('#wh-method').textContent='方法：'+p.method;
+ root.querySelector('#wh-relation').textContent='与 WSP 的关系：'+p.relation;
+ root.querySelectorAll('button[data-paper]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.paper===p.id)));
+ if(save && window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{selectedPaper:p.title,year:p.year,url:p.url},privateContent:{id:p.id,revision:2}}).catch(()=>{});
+}
+const grouped=d3.groups(papers,p=>p.year).sort((a,b)=>a[0]-b[0]);
+const years=d3.select(root.querySelector('#wh-years')).selectAll('section').data(grouped).join('section').attr('class','wh-year');
+years.append('div').attr('class','wh-year-label tabular-nums').text(d=>d[0]);
+function addPaper(container,p) {
+ const entry=container.append('div').attr('class','wh-entry').style('--route-color',`var(--viz-series-${p.lane+1})`);
+ entry.append('span').attr('class','wh-dot'+(p.added?' wh-new':'')).attr('aria-hidden','true');
+ entry.append('button').attr('class','btn').attr('type','button').attr('data-paper',p.id).attr('aria-label',p.year+'，'+p.title+(p.added?'，本次新增':'')).attr('aria-pressed','false').text(p.short).on('click',()=>select(p.id,true));
+}
+years.each(function([year,items]) {
+ const row=d3.select(this);
+ lanes.forEach((label,i)=>{
+  const lane=row.append('div').attr('class','wh-lane');
+  const ps=items.filter(p=>p.lane===i);
+  if(ps.length) lane.append('span').attr('class','wh-mobile-label text-small text-muted').text(label);
+  ps.forEach(p=>addPaper(lane,p));
+ });
+ items.filter(p=>p.lane===5).forEach(p=>{
+  const merged=row.append('div').attr('class','wh-merge');
+  addPaper(merged,p);
+  merged.append('span').attr('class','text-small').text('11 月 2 日 · 通用 LLM 读取、修复与构造权重');
+ });
+});
+const saved=window.openai?.widgetState?.privateContent;
+select(saved?.revision===2?saved.id:'thinkedit');
+window.addEventListener('openai:set_globals',e=>{const s=e.detail?.globals?.widgetState?.privateContent;if(s?.revision===2&&s.id)select(s.id);});
+})();
+</script>
