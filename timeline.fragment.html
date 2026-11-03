@@ -1,6 +1,6 @@
 <div id="wsp-history">
   <h2>通向 WSP 的研究时间线</h2>
-  <div class="text-small text-muted wh-caption">1992—2026 · 27 项代表工作 · 5 条研究路线</div>
+  <div class="text-small text-muted wh-caption">1992—2026 · 28 项代表工作 · 5 条研究路线</div>
   <div class="card wh-detail" aria-live="polite">
     <div class="text-small" id="wh-meta"></div>
     <a id="wh-title" target="_blank" rel="noopener noreferrer"></a>
@@ -9,7 +9,7 @@
   </div>
   <div class="wh-head" aria-hidden="true"><span>年份</span><span>读取机制</span><span>编辑行为</span><span>生成权重</span><span>构造网络</span><span>研究与优化</span></div>
   <div id="wh-years" aria-label="按年份与研究方向排列的论文"></div>
-  <div class="text-small text-muted wh-caption">◆ 本次新增 11 项　● 原有工作 · 点击名称查看方法与原文</div>
+  <div class="text-small text-muted wh-caption">◆ 后续补充 12 项　● 初版 16 项 · 点击名称查看方法与原文</div>
   <div class="text-small text-muted wh-caption">按所列工作的首次公开年份分组；年份间距不代表时长。分类表示概念关联，不表示直接继承或概念首创。</div>
 </div>
 <style>
@@ -42,6 +42,7 @@
 (() => {
 const root = document.getElementById('wsp-history');
 const papers = [
+ {id:'adderboard',year:2026,lane:3,short:'AdderBoard',added:true,title:'AdderBoard: A Community Challenge for Tiny Arithmetic Transformers',venue:'2026 年 2 月 · 社区挑战与排行榜',url:'https://github.com/anadim/AdderBoard',method:'寻找能完成十位数加法的最小自回归 Transformer，分训练与解析设权两条赛道；部分解析构造提交由编码 Agent 参与。',relation:'WSP 原文明确提及的微型网络构造先例；最接近的是解析设权赛道。它是单任务挑战，不能将整个排行榜视为无梯度方法或通用权重编程。'},
  {id:'fast',year:1992,lane:2,short:'快权重',added:true,title:'Learning to Control Fast-Weight Memories: An Alternative to Dynamic Recurrent Networks',venue:'1992 年 · Neural Computation',url:'https://people.idsia.ch/~juergen/fastweights/',method:'一个网络生成随上下文变化的权重更新，控制另一个网络的快速记忆；系统通过梯度训练。',relation:'历史概念背景：网络编程另一个网络已有先例；不等同于通用 LLM 按自然语言目标编辑权重。'},
  {id:'es',year:2017,lane:4,short:'ES',added:true,title:'Evolution Strategies as a Scalable Alternative to Reinforcement Learning',venue:'2017 年 3 月 · 预印本',url:'https://arxiv.org/abs/1703.03864',method:'通过参数扰动及回报估计更新方向，用黑箱优化训练策略，无需穿过目标网络反向传播。',relation:'优化背景：不对目标网络反向传播不是新概念；ES 依赖随机搜索与反馈，不以 LLM 的机制分析决定编辑。'},
  {id:'rewrite',year:2020,lane:1,short:'模型重写',added:true,title:'Rewriting a Deep Generative Model',venue:'2020 年 7 月首次公开 · ECCV 2020',url:'https://arxiv.org/abs/2007.15646',method:'将生成模型的一层视为线性关联记忆，局部改写其中编码的生成规则。',relation:'编辑方法背景：从修改输出转向修改模型内部规则；研究者设计编辑算法，不由通用 LLM 自主提出。'},
@@ -73,17 +74,17 @@ const papers = [
 const laneOverrides={learnopt:4,opro:4,maia:4,tracr:3,wsp:5};
 const labels={learnopt:'学习型优化器',hyper:'Hypernets',circuits:'Circuits',task:'任务算术',nfn:'NFN',openai:'神经元解释',caa:'CAA',t2l:'Text-to-LoRA',wsp:'WSP'};
 papers.forEach(p=>{if(p.id in laneOverrides)p.lane=laneOverrides[p.id];if(labels[p.id])p.short=labels[p.id];});
-const order=['fast','learnopt','hyper','es','rewrite','rasp','mend','circuits','rome','soups','task','tracr','nfn','openai','actadd','opro','repe','caa','patch','maia','direction','thinkedit','t2l','weightsteer','d2l','l2w','wsp'];
+const order=['fast','learnopt','hyper','es','rewrite','rasp','mend','circuits','rome','soups','task','tracr','nfn','openai','actadd','opro','repe','caa','patch','maia','direction','thinkedit','t2l','weightsteer','d2l','adderboard','l2w','wsp'];
 papers.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
 const lanes = ['读取机制','编辑行为','生成权重','构造网络','研究与优化'];
 function select(id,save=false) {
- const p=papers.find(p=>p.id===id)||papers.find(p=>p.id==='thinkedit');
- root.querySelector('#wh-meta').textContent=p.venue+' · '+(lanes[p.lane]||'WSP 研究对象')+(p.added?' · 本次新增':'');
+ const p=papers.find(p=>p.id===id)||papers.find(p=>p.id==='adderboard');
+ root.querySelector('#wh-meta').textContent=p.venue+' · '+(lanes[p.lane]||'WSP 研究对象')+(p.added?' · 补充条目':'');
  const title=root.querySelector('#wh-title'); title.textContent=p.title+' ↗'; title.href=p.url;
  root.querySelector('#wh-method').textContent='方法：'+p.method;
  root.querySelector('#wh-relation').textContent='与 WSP 的关系：'+p.relation;
  root.querySelectorAll('button[data-paper]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.paper===p.id)));
- if(save && window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{selectedPaper:p.title,year:p.year,url:p.url},privateContent:{id:p.id,revision:2}}).catch(()=>{});
+ if(save && window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{selectedPaper:p.title,year:p.year,url:p.url},privateContent:{id:p.id,revision:3}}).catch(()=>{});
 }
 const grouped=d3.groups(papers,p=>p.year).sort((a,b)=>a[0]-b[0]);
 const years=d3.select(root.querySelector('#wh-years')).selectAll('section').data(grouped).join('section').attr('class','wh-year');
@@ -91,7 +92,7 @@ years.append('div').attr('class','wh-year-label tabular-nums').text(d=>d[0]);
 function addPaper(container,p) {
  const entry=container.append('div').attr('class','wh-entry').style('--route-color',`var(--viz-series-${p.lane+1})`);
  entry.append('span').attr('class','wh-dot'+(p.added?' wh-new':'')).attr('aria-hidden','true');
- entry.append('button').attr('class','btn').attr('type','button').attr('data-paper',p.id).attr('aria-label',p.year+'，'+p.title+(p.added?'，本次新增':'')).attr('aria-pressed','false').text(p.short).on('click',()=>select(p.id,true));
+ entry.append('button').attr('class','btn').attr('type','button').attr('data-paper',p.id).attr('aria-label',p.year+'，'+p.title+(p.added?'，补充条目':'')).attr('aria-pressed','false').text(p.short).on('click',()=>select(p.id,true));
 }
 years.each(function([year,items]) {
  const row=d3.select(this);
@@ -108,7 +109,7 @@ years.each(function([year,items]) {
  });
 });
 const saved=window.openai?.widgetState?.privateContent;
-select(saved?.revision===2?saved.id:'thinkedit');
-window.addEventListener('openai:set_globals',e=>{const s=e.detail?.globals?.widgetState?.privateContent;if(s?.revision===2&&s.id)select(s.id);});
+select(saved?.revision===3?saved.id:'adderboard');
+window.addEventListener('openai:set_globals',e=>{const s=e.detail?.globals?.widgetState?.privateContent;if(s?.revision===3&&s.id)select(s.id);});
 })();
 </script>

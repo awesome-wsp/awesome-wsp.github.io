@@ -1,6 +1,6 @@
 # Awesome WSP — Research Timeline
 
-Interactive research background for weight-space programming, covering 27 representative works from 1992 to 2026.
+Interactive research background for weight-space programming, covering 28 representative works from 1992 to 2026.
 
 - Website: https://awesome-wsp.github.io/
 - Resource library: https://github.com/brighterr/awesome-wsp
@@ -10,7 +10,7 @@ Interactive research background for weight-space programming, covering 27 repres
 
 ## Research update — 2026-11-03
 
-The expanded view adds 11 works, marks additions with diamonds, and separates five conceptual routes. See [RESEARCH_NOTES.md](RESEARCH_NOTES.md) for inclusion decisions and methodological caveats. The editable diagram source is [timeline.fragment.html](timeline.fragment.html).
+The expanded view adds 12 works to the initial 16, marks additions with diamonds, and separates five conceptual routes. The latest addition is AdderBoard (2026), a community challenge with distinct trained and hand-coded tracks, explicitly discussed in the WSP report. See [RESEARCH_NOTES.md](RESEARCH_NOTES.md) for inclusion decisions and methodological caveats. The editable diagram source is [timeline.fragment.html](timeline.fragment.html).
 
 ## Hosting
 

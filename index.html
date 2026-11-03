@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://persistent.oaistatic.com/plugins/visualize/; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<meta name="description" content="Explore the research background of weight-space programming: 27 works across interpretation, editing, weight generation, network construction, and automated research, 1992–2026.">
+<meta name="description" content="Explore the research background of weight-space programming: 28 works across interpretation, editing, weight generation, network construction, and automated research, 1992–2026.">
 <title>Awesome WSP · Research Timeline</title>
 <style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit;max-width:1100px;margin:0 auto;font-family:system-ui,sans-serif}header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin:12px 0 28px}header a{color:inherit;text-decoration:none}header nav{display:flex;gap:18px;font-size:14px}header strong{font-size:18px}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
 
@@ -1816,7 +1816,7 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;/script&gt;
 &lt;div id=&quot;wsp-history&quot;&gt;
   &lt;h2&gt;通向 WSP 的研究时间线&lt;/h2&gt;
-  &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;1992—2026 · 27 项代表工作 · 5 条研究路线&lt;/div&gt;
+  &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;1992—2026 · 28 项代表工作 · 5 条研究路线&lt;/div&gt;
   &lt;div class=&quot;card wh-detail&quot; aria-live=&quot;polite&quot;&gt;
     &lt;div class=&quot;text-small&quot; id=&quot;wh-meta&quot;&gt;&lt;/div&gt;
     &lt;a id=&quot;wh-title&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;/a&gt;
@@ -1825,7 +1825,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;/div&gt;
   &lt;div class=&quot;wh-head&quot; aria-hidden=&quot;true&quot;&gt;&lt;span&gt;年份&lt;/span&gt;&lt;span&gt;读取机制&lt;/span&gt;&lt;span&gt;编辑行为&lt;/span&gt;&lt;span&gt;生成权重&lt;/span&gt;&lt;span&gt;构造网络&lt;/span&gt;&lt;span&gt;研究与优化&lt;/span&gt;&lt;/div&gt;
   &lt;div id=&quot;wh-years&quot; aria-label=&quot;按年份与研究方向排列的论文&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;◆ 本次新增 11 项　● 原有工作 · 点击名称查看方法与原文&lt;/div&gt;
+  &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;◆ 后续补充 12 项　● 初版 16 项 · 点击名称查看方法与原文&lt;/div&gt;
   &lt;div class=&quot;text-small text-muted wh-caption&quot;&gt;按所列工作的首次公开年份分组；年份间距不代表时长。分类表示概念关联，不表示直接继承或概念首创。&lt;/div&gt;
 &lt;/div&gt;
 &lt;style&gt;
@@ -1860,6 +1860,7 @@ html&gt;body{padding:0}&lt;/style&gt;
 (() =&gt; {
 const root = document.getElementById(&#x27;wsp-history&#x27;);
 const papers = [
+ {id:&#x27;adderboard&#x27;,year:2026,lane:3,short:&#x27;AdderBoard&#x27;,added:true,title:&#x27;AdderBoard: A Community Challenge for Tiny Arithmetic Transformers&#x27;,venue:&#x27;2026 年 2 月 · 社区挑战与排行榜&#x27;,url:&#x27;https://github.com/anadim/AdderBoard&#x27;,method:&#x27;寻找能完成十位数加法的最小自回归 Transformer，分训练与解析设权两条赛道；部分解析构造提交由编码 Agent 参与。&#x27;,relation:&#x27;WSP 原文明确提及的微型网络构造先例；最接近的是解析设权赛道。它是单任务挑战，不能将整个排行榜视为无梯度方法或通用权重编程。&#x27;},
  {id:&#x27;fast&#x27;,year:1992,lane:2,short:&#x27;快权重&#x27;,added:true,title:&#x27;Learning to Control Fast-Weight Memories: An Alternative to Dynamic Recurrent Networks&#x27;,venue:&#x27;1992 年 · Neural Computation&#x27;,url:&#x27;https://people.idsia.ch/~juergen/fastweights/&#x27;,method:&#x27;一个网络生成随上下文变化的权重更新，控制另一个网络的快速记忆；系统通过梯度训练。&#x27;,relation:&#x27;历史概念背景：网络编程另一个网络已有先例；不等同于通用 LLM 按自然语言目标编辑权重。&#x27;},
  {id:&#x27;es&#x27;,year:2017,lane:4,short:&#x27;ES&#x27;,added:true,title:&#x27;Evolution Strategies as a Scalable Alternative to Reinforcement Learning&#x27;,venue:&#x27;2017 年 3 月 · 预印本&#x27;,url:&#x27;https://arxiv.org/abs/1703.03864&#x27;,method:&#x27;通过参数扰动及回报估计更新方向，用黑箱优化训练策略，无需穿过目标网络反向传播。&#x27;,relation:&#x27;优化背景：不对目标网络反向传播不是新概念；ES 依赖随机搜索与反馈，不以 LLM 的机制分析决定编辑。&#x27;},
  {id:&#x27;rewrite&#x27;,year:2020,lane:1,short:&#x27;模型重写&#x27;,added:true,title:&#x27;Rewriting a Deep Generative Model&#x27;,venue:&#x27;2020 年 7 月首次公开 · ECCV 2020&#x27;,url:&#x27;https://arxiv.org/abs/2007.15646&#x27;,method:&#x27;将生成模型的一层视为线性关联记忆，局部改写其中编码的生成规则。&#x27;,relation:&#x27;编辑方法背景：从修改输出转向修改模型内部规则；研究者设计编辑算法，不由通用 LLM 自主提出。&#x27;},
@@ -1891,17 +1892,17 @@ const papers = [
 const laneOverrides={learnopt:4,opro:4,maia:4,tracr:3,wsp:5};
 const labels={learnopt:&#x27;学习型优化器&#x27;,hyper:&#x27;Hypernets&#x27;,circuits:&#x27;Circuits&#x27;,task:&#x27;任务算术&#x27;,nfn:&#x27;NFN&#x27;,openai:&#x27;神经元解释&#x27;,caa:&#x27;CAA&#x27;,t2l:&#x27;Text-to-LoRA&#x27;,wsp:&#x27;WSP&#x27;};
 papers.forEach(p=&gt;{if(p.id in laneOverrides)p.lane=laneOverrides[p.id];if(labels[p.id])p.short=labels[p.id];});
-const order=[&#x27;fast&#x27;,&#x27;learnopt&#x27;,&#x27;hyper&#x27;,&#x27;es&#x27;,&#x27;rewrite&#x27;,&#x27;rasp&#x27;,&#x27;mend&#x27;,&#x27;circuits&#x27;,&#x27;rome&#x27;,&#x27;soups&#x27;,&#x27;task&#x27;,&#x27;tracr&#x27;,&#x27;nfn&#x27;,&#x27;openai&#x27;,&#x27;actadd&#x27;,&#x27;opro&#x27;,&#x27;repe&#x27;,&#x27;caa&#x27;,&#x27;patch&#x27;,&#x27;maia&#x27;,&#x27;direction&#x27;,&#x27;thinkedit&#x27;,&#x27;t2l&#x27;,&#x27;weightsteer&#x27;,&#x27;d2l&#x27;,&#x27;l2w&#x27;,&#x27;wsp&#x27;];
+const order=[&#x27;fast&#x27;,&#x27;learnopt&#x27;,&#x27;hyper&#x27;,&#x27;es&#x27;,&#x27;rewrite&#x27;,&#x27;rasp&#x27;,&#x27;mend&#x27;,&#x27;circuits&#x27;,&#x27;rome&#x27;,&#x27;soups&#x27;,&#x27;task&#x27;,&#x27;tracr&#x27;,&#x27;nfn&#x27;,&#x27;openai&#x27;,&#x27;actadd&#x27;,&#x27;opro&#x27;,&#x27;repe&#x27;,&#x27;caa&#x27;,&#x27;patch&#x27;,&#x27;maia&#x27;,&#x27;direction&#x27;,&#x27;thinkedit&#x27;,&#x27;t2l&#x27;,&#x27;weightsteer&#x27;,&#x27;d2l&#x27;,&#x27;adderboard&#x27;,&#x27;l2w&#x27;,&#x27;wsp&#x27;];
 papers.sort((a,b)=&gt;order.indexOf(a.id)-order.indexOf(b.id));
 const lanes = [&#x27;读取机制&#x27;,&#x27;编辑行为&#x27;,&#x27;生成权重&#x27;,&#x27;构造网络&#x27;,&#x27;研究与优化&#x27;];
 function select(id,save=false) {
- const p=papers.find(p=&gt;p.id===id)||papers.find(p=&gt;p.id===&#x27;thinkedit&#x27;);
- root.querySelector(&#x27;#wh-meta&#x27;).textContent=p.venue+&#x27; · &#x27;+(lanes[p.lane]||&#x27;WSP 研究对象&#x27;)+(p.added?&#x27; · 本次新增&#x27;:&#x27;&#x27;);
+ const p=papers.find(p=&gt;p.id===id)||papers.find(p=&gt;p.id===&#x27;adderboard&#x27;);
+ root.querySelector(&#x27;#wh-meta&#x27;).textContent=p.venue+&#x27; · &#x27;+(lanes[p.lane]||&#x27;WSP 研究对象&#x27;)+(p.added?&#x27; · 补充条目&#x27;:&#x27;&#x27;);
  const title=root.querySelector(&#x27;#wh-title&#x27;); title.textContent=p.title+&#x27; ↗&#x27;; title.href=p.url;
  root.querySelector(&#x27;#wh-method&#x27;).textContent=&#x27;方法：&#x27;+p.method;
  root.querySelector(&#x27;#wh-relation&#x27;).textContent=&#x27;与 WSP 的关系：&#x27;+p.relation;
  root.querySelectorAll(&#x27;button[data-paper]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b.dataset.paper===p.id)));
- if(save &amp;&amp; window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{selectedPaper:p.title,year:p.year,url:p.url},privateContent:{id:p.id,revision:2}}).catch(()=&gt;{});
+ if(save &amp;&amp; window.openai?.setWidgetState) window.openai.setWidgetState({modelContent:{selectedPaper:p.title,year:p.year,url:p.url},privateContent:{id:p.id,revision:3}}).catch(()=&gt;{});
 }
 const grouped=d3.groups(papers,p=&gt;p.year).sort((a,b)=&gt;a[0]-b[0]);
 const years=d3.select(root.querySelector(&#x27;#wh-years&#x27;)).selectAll(&#x27;section&#x27;).data(grouped).join(&#x27;section&#x27;).attr(&#x27;class&#x27;,&#x27;wh-year&#x27;);
@@ -1909,7 +1910,7 @@ years.append(&#x27;div&#x27;).attr(&#x27;class&#x27;,&#x27;wh-year-label tabular
 function addPaper(container,p) {
  const entry=container.append(&#x27;div&#x27;).attr(&#x27;class&#x27;,&#x27;wh-entry&#x27;).style(&#x27;--route-color&#x27;,`var(--viz-series-${p.lane+1})`);
  entry.append(&#x27;span&#x27;).attr(&#x27;class&#x27;,&#x27;wh-dot&#x27;+(p.added?&#x27; wh-new&#x27;:&#x27;&#x27;)).attr(&#x27;aria-hidden&#x27;,&#x27;true&#x27;);
- entry.append(&#x27;button&#x27;).attr(&#x27;class&#x27;,&#x27;btn&#x27;).attr(&#x27;type&#x27;,&#x27;button&#x27;).attr(&#x27;data-paper&#x27;,p.id).attr(&#x27;aria-label&#x27;,p.year+&#x27;，&#x27;+p.title+(p.added?&#x27;，本次新增&#x27;:&#x27;&#x27;)).attr(&#x27;aria-pressed&#x27;,&#x27;false&#x27;).text(p.short).on(&#x27;click&#x27;,()=&gt;select(p.id,true));
+ entry.append(&#x27;button&#x27;).attr(&#x27;class&#x27;,&#x27;btn&#x27;).attr(&#x27;type&#x27;,&#x27;button&#x27;).attr(&#x27;data-paper&#x27;,p.id).attr(&#x27;aria-label&#x27;,p.year+&#x27;，&#x27;+p.title+(p.added?&#x27;，补充条目&#x27;:&#x27;&#x27;)).attr(&#x27;aria-pressed&#x27;,&#x27;false&#x27;).text(p.short).on(&#x27;click&#x27;,()=&gt;select(p.id,true));
 }
 years.each(function([year,items]) {
  const row=d3.select(this);
@@ -1926,8 +1927,8 @@ years.each(function([year,items]) {
  });
 });
 const saved=window.openai?.widgetState?.privateContent;
-select(saved?.revision===2?saved.id:&#x27;thinkedit&#x27;);
-window.addEventListener(&#x27;openai:set_globals&#x27;,e=&gt;{const s=e.detail?.globals?.widgetState?.privateContent;if(s?.revision===2&amp;&amp;s.id)select(s.id);});
+select(saved?.revision===3?saved.id:&#x27;adderboard&#x27;);
+window.addEventListener(&#x27;openai:set_globals&#x27;,e=&gt;{const s=e.detail?.globals?.widgetState?.privateContent;if(s?.revision===3&amp;&amp;s.id)select(s.id);});
 })();
 &lt;/script&gt;
 
